@@ -1,8 +1,0 @@
-name: ESLint checks
-on: pull_request
-jobs:
-  build:
-    name: calibreapp/image-actions
-    runs-on: ubuntu-latest
-    steps:
-      - uses: gimenete/eslint-action@1.0
