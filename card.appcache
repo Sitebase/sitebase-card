@@ -1,12 +1,13 @@
 CACHE MANIFEST
 
-# Offline cache v1.3
+# Offline cache v1.6
 # html files
 index.html
 
 # css files
-style.css
+assets/style.css
+assets/img/logo.svg
 
 # other files
-favicon.ico
+assets/img/favicon.ico
 vCard.vcf
