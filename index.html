@@ -58,7 +58,10 @@
             <div class="table">
                 <div>
                     <span class="table__key">VAT<span class="hm">(btw)</span></span>
-                    <span class="table__value" itemprop="vatId">BE.0688.565.584</span>
+                    <span class="table__value table__value--inline">
+                        <span itemprop="vatId" id="vat-id">BE0688565584</span>
+                        <button class="copy-icon" type="button" aria-label="Copy VAT number" data-copy-target="vat-id">⧉</button>
+                    </span>
                 </div>
                 <div>
                     <span class="table__key">Bank <span class="hm">(BNP Paribas Fortis)</span></span>
@@ -73,5 +76,35 @@
 
         </div>
         </div>
+        <script>
+            (function () {
+                function fallbackCopy(text) {
+                    var input = document.createElement('textarea');
+                    input.value = text;
+                    document.body.appendChild(input);
+                    input.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(input);
+                }
+
+                var button = document.querySelector('[data-copy-target="vat-id"]');
+                if (!button) return;
+
+                button.addEventListener('click', function () {
+                    var target = document.getElementById(button.getAttribute('data-copy-target'));
+                    if (!target) return;
+
+                    var value = target.textContent.trim();
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(value).catch(function () {
+                            fallbackCopy(value);
+                        });
+                        return;
+                    }
+
+                    fallbackCopy(value);
+                });
+            }());
+        </script>
     </body>
 </html>

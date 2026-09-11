@@ -75,6 +75,26 @@ a:hover {
   width: 50%;
 }
 
+.table__value--inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.copy-icon {
+  border: 0;
+  background: transparent;
+  color: rgba(0, 0, 0, .44);
+  cursor: pointer;
+  font-size: .9em;
+  line-height: 1;
+  padding: 0;
+}
+
+.copy-icon:hover {
+  color: #df3a4a;
+}
+
 .button {
     font-size: .8em;
     color: #df3a4a;
