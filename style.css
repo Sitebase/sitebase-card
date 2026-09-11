@@ -91,9 +91,10 @@ a:hover {
   justify-content: center;
   font-size: .9em;
   line-height: 1;
-  padding: 0;
+  padding: 0 4px;
   min-width: 24px;
   min-height: 24px;
+  border-radius: 3px;
 }
 
 .copy-icon svg {
@@ -102,14 +103,19 @@ a:hover {
 
 .copy-icon:hover {
   color: #111;
-  text-decoration: underline;
+  background: rgba(0, 0, 0, .08);
 }
 
 .copy-icon:focus-visible {
   color: #111;
-  text-decoration: underline;
+  background: rgba(0, 0, 0, .08);
   outline: 2px solid #404042;
   outline-offset: 2px;
+}
+
+.copy-icon__text {
+  font-size: .75em;
+  margin-left: 4px;
 }
 
 .sr-only {
