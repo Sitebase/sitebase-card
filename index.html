@@ -60,7 +60,7 @@
                     <span class="table__key">VAT<span class="hm">(btw)</span></span>
                     <span class="table__value table__value--inline">
                         <span itemprop="vatId" id="vat-id">BE0688565584</span>
-                        <button class="copy-icon" type="button" title="Copy VAT number" data-copy-target="vat-id">
+                        <button class="copy-icon" type="button" data-copy-target="vat-id">
                             <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="12" height="12">
                                 <path fill="currentColor" d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path>
                             </svg>
@@ -119,17 +119,9 @@
                     }, 0);
                 }
 
-                function markSuccess() {
+                function markStatus(message) {
                     if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
-                    announceCopyStatus('VAT number copied');
-                    resetStatusTimer = window.setTimeout(function () {
-                        setCopyStatus('');
-                    }, 1500);
-                }
-
-                function markFailure() {
-                    if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
-                    announceCopyStatus('Unable to copy VAT number');
+                    announceCopyStatus(message);
                     resetStatusTimer = window.setTimeout(function () {
                         setCopyStatus('');
                     }, 1500);
@@ -145,22 +137,22 @@
 
                     if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard.writeText(value).then(function () {
-                            markSuccess();
+                            markStatus('VAT number copied');
                         }).catch(function () {
                             if (fallbackCopy(value)) {
-                                markSuccess();
+                                markStatus('VAT number copied');
                                 return;
                             }
-                            markFailure();
+                            markStatus('Unable to copy VAT number');
                         });
                         return;
                     }
 
                     if (fallbackCopy(value)) {
-                        markSuccess();
+                        markStatus('VAT number copied');
                         return;
                     }
-                    markFailure();
+                    markStatus('Unable to copy VAT number');
                 });
             }());
         </script>
