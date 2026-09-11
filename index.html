@@ -64,6 +64,7 @@
                             <span aria-hidden="true">⧉</span>
                             <span class="sr-only copy-icon__label">Copy VAT number</span>
                         </button>
+                        <span class="sr-only" id="vat-copy-status" aria-live="polite"></span>
                     </span>
                 </div>
                 <div>
@@ -97,16 +98,20 @@
                 var button = document.querySelector('[data-copy-target="vat-id"]');
                 if (!button) return;
                 var buttonLabel = button.querySelector('.copy-icon__label');
+                var statusRegion = document.getElementById('vat-copy-status');
+                var resetStatusTimer;
 
                 function setCopyStatus(message) {
                     button.setAttribute('aria-label', message);
                     button.title = message;
                     if (buttonLabel) buttonLabel.textContent = message;
+                    if (statusRegion) statusRegion.textContent = message;
                 }
 
                 function markSuccess() {
+                    if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
                     setCopyStatus('VAT number copied');
-                    window.setTimeout(function () {
+                    resetStatusTimer = window.setTimeout(function () {
                         setCopyStatus('Copy VAT number');
                     }, 1500);
                 }
