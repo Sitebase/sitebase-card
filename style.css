@@ -91,6 +91,10 @@ a:hover {
   padding: 0;
 }
 
+.copy-icon svg {
+  display: block;
+}
+
 .copy-icon:hover {
   color: #111;
   text-decoration: underline;
