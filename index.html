@@ -62,7 +62,6 @@
                         <span itemprop="vatId" id="vat-id">BE0688565584</span>
                         <button class="copy-icon" type="button" aria-label="Copy VAT number" title="Copy VAT number" data-copy-target="vat-id">
                             <span aria-hidden="true">⧉</span>
-                            <span class="sr-only copy-icon__label">Copy VAT number</span>
                         </button>
                         <span class="sr-only" id="vat-copy-status" aria-live="polite"></span>
                     </span>
@@ -97,14 +96,10 @@
 
                 var button = document.querySelector('[data-copy-target="vat-id"]');
                 if (!button) return;
-                var buttonLabel = button.querySelector('.copy-icon__label');
                 var statusRegion = document.getElementById('vat-copy-status');
                 var resetStatusTimer;
 
                 function setCopyStatus(message) {
-                    button.setAttribute('aria-label', message);
-                    button.title = message;
-                    if (buttonLabel) buttonLabel.textContent = message;
                     if (statusRegion) statusRegion.textContent = message;
                 }
 
@@ -129,9 +124,10 @@
                     if (!target) return;
 
                     var value = target.textContent.trim();
+                    if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
+                    setCopyStatus('');
 
                     if (navigator.clipboard && navigator.clipboard.writeText) {
-                        setCopyStatus('Copy VAT number');
                         navigator.clipboard.writeText(value).then(function () {
                             markSuccess();
                         }).catch(function () {
@@ -144,7 +140,6 @@
                         return;
                     }
 
-                    setCopyStatus('Copy VAT number');
                     if (fallbackCopy(value)) {
                         markSuccess();
                         return;
