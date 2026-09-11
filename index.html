@@ -116,14 +116,19 @@
                     }, 1500);
                 }
 
+                function markFailure() {
+                    if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
+                    setCopyStatus('Unable to copy VAT number');
+                    resetStatusTimer = window.setTimeout(function () {
+                        setCopyStatus('Copy VAT number');
+                    }, 1500);
+                }
+
                 button.addEventListener('click', function () {
                     var target = document.getElementById(button.getAttribute('data-copy-target'));
                     if (!target) return;
 
                     var value = target.textContent.trim();
-                    function markFailure() {
-                        setCopyStatus('Unable to copy VAT number');
-                    }
 
                     if (navigator.clipboard && navigator.clipboard.writeText) {
                         setCopyStatus('Copy VAT number');
