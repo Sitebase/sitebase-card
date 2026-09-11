@@ -107,7 +107,7 @@
                     if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
                     setCopyStatus('VAT number copied');
                     resetStatusTimer = window.setTimeout(function () {
-                        setCopyStatus('Copy VAT number');
+                        setCopyStatus('');
                     }, 1500);
                 }
 
@@ -115,7 +115,7 @@
                     if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
                     setCopyStatus('Unable to copy VAT number');
                     resetStatusTimer = window.setTimeout(function () {
-                        setCopyStatus('Copy VAT number');
+                        setCopyStatus('');
                     }, 1500);
                 }
 
