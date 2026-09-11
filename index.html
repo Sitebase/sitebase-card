@@ -62,7 +62,7 @@
                         <span itemprop="vatId" id="vat-id">BE0688565584</span>
                         <button class="copy-icon" type="button" aria-label="Copy VAT number" title="Copy VAT number" data-copy-target="vat-id">
                             <span aria-hidden="true">⧉</span>
-                            <span class="sr-only">Copy VAT number</span>
+                            <span class="sr-only copy-icon__label">Copy VAT number</span>
                         </button>
                     </span>
                 </div>
@@ -96,6 +96,13 @@
 
                 var button = document.querySelector('[data-copy-target="vat-id"]');
                 if (!button) return;
+                var buttonLabel = button.querySelector('.copy-icon__label');
+
+                function setCopyStatus(message) {
+                    button.setAttribute('aria-label', message);
+                    button.title = message;
+                    if (buttonLabel) buttonLabel.textContent = message;
+                }
 
                 button.addEventListener('click', function () {
                     var target = document.getElementById(button.getAttribute('data-copy-target'));
@@ -103,17 +110,18 @@
 
                     var value = target.textContent.trim();
                     function markFailure() {
-                        button.setAttribute('aria-label', 'Unable to copy VAT number');
-                        button.title = 'Unable to copy VAT number';
+                        setCopyStatus('Unable to copy VAT number');
                     }
 
                     if (navigator.clipboard && navigator.clipboard.writeText) {
+                        setCopyStatus('Copy VAT number');
                         navigator.clipboard.writeText(value).catch(function () {
                             if (!fallbackCopy(value)) markFailure();
                         });
                         return;
                     }
 
+                    setCopyStatus('Copy VAT number');
                     if (!fallbackCopy(value)) markFailure();
                 });
             }());
