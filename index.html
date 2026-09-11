@@ -135,7 +135,7 @@
                     if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
                     setCopyStatus('');
 
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                    if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard.writeText(value).then(function () {
                             markSuccess();
                         }).catch(function () {
