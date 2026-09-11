@@ -111,9 +111,16 @@
                     if (statusRegion) statusRegion.textContent = message;
                 }
 
+                function announceCopyStatus(message) {
+                    setCopyStatus('');
+                    window.setTimeout(function () {
+                        setCopyStatus(message);
+                    }, 0);
+                }
+
                 function markSuccess() {
                     if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
-                    setCopyStatus('VAT number copied');
+                    announceCopyStatus('VAT number copied');
                     resetStatusTimer = window.setTimeout(function () {
                         setCopyStatus('');
                     }, 1500);
@@ -121,7 +128,7 @@
 
                 function markFailure() {
                     if (resetStatusTimer) window.clearTimeout(resetStatusTimer);
-                    setCopyStatus('Unable to copy VAT number');
+                    announceCopyStatus('Unable to copy VAT number');
                     resetStatusTimer = window.setTimeout(function () {
                         setCopyStatus('');
                     }, 1500);
